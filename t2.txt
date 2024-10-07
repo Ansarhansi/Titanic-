@@ -1,0 +1,44 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('ds2.csv', low_memory=False)
+
+print(df.head())  
+print(df.shape)  
+print(df.info())  
+
+print(df.describe())  
+
+print(df.isnull().sum())  
+
+print(df.duplicated().sum()) 
+
+
+plt.hist(df['Age'], bins=20, color='skyblue', edgecolor='black')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title('Distribution of Ages')
+plt.show()
+
+genders = ['Male', 'Female', 'Non-binary', 'Other']
+counts = [120, 85, 10, 5]
+plt.bar(genders, counts, color='purple')
+plt.xlabel('Sex')
+plt.ylabel('Count')
+plt.title('Distribution of Genders')
+plt.show()
+
+
+
+
+df = pd.read_csv('ds2.csv')  
+
+numeric_columns = df.select_dtypes(include=['number'])
+
+corr_matrix = numeric_columns.corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Correlation Matrix')
+plt.show()
